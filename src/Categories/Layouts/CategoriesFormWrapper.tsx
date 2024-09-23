@@ -1,11 +1,26 @@
-import React from 'react'
+import React, from 'react';
+import { Formik, Form } from 'formik';
 
-type Props = {}
+
+import CategoriesFormLayouts from './CategoriesFormLayouts';
+
+
+type Props = {};
 
 const CategoriesFormWrapper = (props: Props) => {
-  return (
-    <div>yash</div>
-  )
-}
 
-export default CategoriesFormWrapper
+
+  return (
+    <Formik >
+      {(formikProps) => {
+        return (
+          <Form>
+            <CategoriesFormLayouts formikProps={formikProps} />
+          </Form>
+        );
+      }}
+    </Formik>
+  );
+};
+
+export default CategoriesFormWrapper;

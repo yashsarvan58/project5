@@ -16,7 +16,9 @@ const PageRoutes = () => {
         { path: "/categories",
           element:<CategoriesFormLayouts/>
 
-        }
+        },
+
+        
 
     ]
 
