@@ -1,15 +1,22 @@
 
 import { object, string } from 'yup'
 import Login from './Login'
-import { Form, Formik } from 'formik'
+import { Form, Formik, FormikHelpers } from 'formik'
 import { useLoginMutation } from '../Slice/AuthSlice'
+import {  useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
+ 
 
 
 const LoginWrapper= () => {
+const navigate=useNavigate()
+
 const [ login]=useLoginMutation()
     const intialValue = {
         email: "",
-        password: ""
+        password: "",
+        adminCode:"ADMIN1234",
       }
       const ValidationSchema = object({
         email: string().required("Email is a required feild"),
@@ -17,14 +24,22 @@ const [ login]=useLoginMutation()
       
       })
       
-      const handleSubmit = (values: any) => {
+      const handleSubmit = (values: any,{setSubmitting}:FormikHelpers<any>) => {
      login(values).then((res)=>{
-        console.log(res)
-     })
-
-        console.log(values);
-        
+      localStorage.setItem("token",res.data.token)
+     
+        toast("Login succesfully ")
       
+      console.log(res)
+ 
+      navigate("/home")
+      
+      setSubmitting(false)
+        console.log(res)   
+  
+     })
+        console.log(values);
+
       }
     return (
 
@@ -35,7 +50,7 @@ const [ login]=useLoginMutation()
       >
         {
           (formikProps) => {
-            console.log(formikProps)
+          
             return (
 
               <Form> 

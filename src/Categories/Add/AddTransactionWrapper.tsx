@@ -1,32 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 
-type Props = {}
+import TransactionShow from './AddTransaction';
 
-const AddTransactionWrapper = (props: Props) => {
-    const [transactions, setTransactions] = useState([]);
-  const [transactionAdd] = useTransactionAddMutation();
-  const navigate = useNavigate();
+const TransactionShowWrapper = () => {
+  const [transactions, setTransactions] = useState([ 
+{id:1,date:11/22/8888,remark:"kjhgf",type:"online",amount:3000}
 
-  const handleClick = () => {
-    navigate('/transactions');
-  };
+  ]);
 
-  const validationSchema = Yup.object({
-    amount: Yup.number().required('Amount is required').positive('Amount must be positive'),
-    type: Yup.string().required('Type is required'),
-    remark: Yup.string().required('Remark is required'),
-    date: Yup.date().required('Date is required').nullable(),
-  });
+  // useEffect(() => {
+  //   const getTransactions = async () => {
+  //     try {
+  //       const res = await fetchTransactions(); // Assuming fetchTransactions returns a promise
+  //       setTransactions(res.data); // Adjust based on your API response structure
+  //     } catch (error) {
+  //       console.error('Error fetching transactions:', error);
+  //     }
+  //   };
 
-  const handleSubmit = (values, { resetForm }) => {
-    transactionAdd(values).then((res) => {
-      console.log(res.data?.data.data);
-    });
-    setTransactions([...transactions, values]);
-    resetForm();
-  };
+  //   getTransactions();
+  // }, []);
 
-  return (
-    <AddTransaction/>
-  )
-}
+  return <TransactionShow transactions={transactions} />;
+};
+
+export default TransactionShowWrapper;

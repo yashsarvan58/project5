@@ -1,50 +1,51 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Transaction = {
+  id: number;
+  amount: number;
+  type: string;
+  remark: string;
+  date: string;
+};
 
-const AddTransaction = (props: Props) => {
+type Props = {
+  transactions: Transaction[];
+};
+
+const TransactionShow: React.FC<Props> = ({ transactions }) => {
   return (
-    <div className="w-1/3 mx-auto my-10 bg-white rounded-lg p-5 shadow-md backdrop-filter backdrop-blur-sm">
-    <h1 className="text-2xl text-center">Add Transactions</h1>
-    <div className="flex flex-col gap-5">
-      <div>
-        <label className="block">Amount:</label>
-        <input
-          className="border p-2 rounded"
-          name="amount"
-          placeholder="Enter the amount"
-        />
-      </div>
-      <div>
-        <label className="block">Type:</label>
-        <select className="border p-2 rounded" name="type">
-          <option value="expense">Expense</option>
-          <option value="income">Income</option>
-        </select>
-      </div>
-      <div>
-        <label className="block">Remark:</label>
-        <input
-          className="border p-2 rounded"
-          name="remark"
-          placeholder="Enter a remark"
-        />
-      </div>
-      <div>
-        <label className="block">Date:</label>
-        <input
-          className="border p-2 rounded"
-          name="date"
-          type="date"
-        />
-      </div>
-      <button
-        type="submit"
-        className="bg-blue-500 text-white rounded p-2 hover:bg-blue-700"
-      >
-        Add Transaction
-      </button>
+    <div className="w-1/2 mx-auto my-10 bg-white rounded-lg p-5 shadow-md">
+      <h1 className="text-2xl text-center">Transactions</h1>
+      <table className="min-w-full mt-5">
+        <thead>
+          <tr>
+            <th className="border px-4 py-2">Amount</th>
+            <th className="border px-4 py-2">Type</th>
+            <th className="border px-4 py-2">Remark</th>
+            <th className="border px-4 py-2">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.length > 0 ? (
+            transactions.map((transaction) => (
+              <tr key={transaction.id} className="border-b">
+                <td className="border px-4 py-2">{transaction.amount}</td>
+                <td className="border px-4 py-2">{transaction.type}</td>
+                <td className="border px-4 py-2">{transaction.remark}</td>
+                <td className="border px-4 py-2">{transaction.date}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={4} className="border px-4 py-2 text-center">
+                No transactions found.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
-  </div>
-  )
-}
+  );
+};
+
+export default TransactionShow;

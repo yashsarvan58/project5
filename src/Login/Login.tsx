@@ -4,9 +4,9 @@ type Props = {formikProps: FormikProps<any>}
 
 
 const Login = ({formikProps}: Props) => {
-  console.log(formikProps)
 
-const {values, setFieldValue} = formikProps
+
+const {values, setFieldValue ,isSubmitting} = formikProps
 
 
   return (
@@ -44,7 +44,8 @@ const {values, setFieldValue} = formikProps
   </div>
   
   <div>
-    <button type='submit' className='border-2 rounded bg-blue-500 mt-2 w-full p-1'>Login</button>
+    <button type='submit' disabled={isSubmitting} className='border-2 rounded bg-blue-500 mt-2 w-full p-1'>
+      {isSubmitting? "Submitting":"Login"}</button>
   </div>
   </div>
 </div>
