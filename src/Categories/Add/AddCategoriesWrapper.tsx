@@ -1,5 +1,5 @@
 import React from 'react'
-import AddCategories from './AddCategories'
+import AddCategories from '../Layout/AddCategories'
 
 type Props = {}
 

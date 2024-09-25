@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import TransactionShow from './AddTransaction';
+import TransactionShow from '../../Transaction/Add/AddTransaction';
 
 const TransactionShowWrapper = () => {
   const [transactions, setTransactions] = useState([ 

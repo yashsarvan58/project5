@@ -1,9 +1,8 @@
 
-import { IoMdHome } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
 import { MdElectricBolt } from "react-icons/md";
 import { TbDeviceMobileMessage } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -13,33 +12,10 @@ const CategoriesFormLayouts = (props: Props) => {
  
 
   return (
-    <div className="flex h-screen  ">
+    <div className="flex h-screen bg-slate-300  ">
+      
+      
   
-      <aside className="bg-gray-500 text-slate-800 w-1/7 p-5">
-        <h2 className="text-xl mb-5"><IoMdHome fontSize={28} /></h2>
-        <hr  className="border-stone-400"/>
-        <nav className="flex flex-col gap-3">
-          <button className="hover:bg-slate-300 p-2 rounded">Dashboard</button>
-          <button className="hover:bg-slate-300 p-2 rounded">categories </button>
-          <button className="hover:bg-slate-300 p-2 rounded">Transaction</button>
-          <button className="hover:bg-slate-300 p-2 rounded">History</button>
-          <button className="hover:bg-slate-300 p-2 rounded">Settings</button>
-        </nav>
-      </aside>
-
-      <div className="flex flex-col flex-grow bg-gray-100">
-        <header className="flex items-center justify-between p-5 bg-opacity-30 backdrop-blur-md">
-          <div className="flex items-center gap-3">
-            
-            <h1 className="text-xl">HOME EXPENSES MANAGER</h1>
-          </div>
-          <div className="flex gap-5">
-           
-            <button>
-              <CgProfile className="text-xl" />
-            </button>
-          </div>
-        </header><hr  className="border"/>
 
         <main className="flex justify-around flex-grow p-10">
           <div className="flex flex-col gap-5 w-1/3">
@@ -78,7 +54,9 @@ const CategoriesFormLayouts = (props: Props) => {
 
   
       </div>
-    </div>
+    
+
+
   );
 };
 

@@ -1,9 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LoginWrapper from '../Login/LoginWrapper'
-import CategoriesFormLayouts from '../Categories/Layouts/CategoriesFormLayouts'
+
+import Layout from '../Sidebar/Layout'
 import AddCategoriesWrapper from '../Categories/Add/AddCategoriesWrapper'
-// import AddTransactionWrapper from '../Categories/Add/AddTransactionWrapper'
-import TransactionShowWrapper from '../Categories/Add/AddTransactionWrapper'
+import AddCategories from '../Categories/Layout/AddCategories'
+import TransactionShowWrapper from '../Transaction/Add/AddTransactionWrapper'
 
 
 const PageRoutes = () => {
@@ -16,27 +17,32 @@ const PageRoutes = () => {
 
         },
 
-        { path: "/home",
-          element:<CategoriesFormLayouts/>
-
+        {
+          path: "/Layout",
+          element:<Layout/>
+         
         },
-        { path: "/categories",
-          element:<AddCategoriesWrapper/>
-
+        {
+          path: "/add",
+          element:<AddCategories/>
+         
         },
-        { path: "/transaction",
+        {
+          path: "/transaction",
           element:<TransactionShowWrapper/>
-
+         
         },
+        // {
+        //   path: "/",
+        //   element:<AddCategories/>
+         
+        // }
 
-        
-
-    ]
-
-)
+      ])
   return (
     <RouterProvider router={router} />
   )
 }
 
 export default PageRoutes
+
