@@ -13,9 +13,7 @@ const CategoriesFormLayouts = (props: Props) => {
 
   return (
     <div className="flex h-screen bg-slate-300  ">
-      
-      
-  
+      <div className=""> home </div> <hr />
 
         <main className="flex justify-around flex-grow p-10">
           <div className="flex flex-col gap-5 w-1/3">
@@ -32,9 +30,9 @@ const CategoriesFormLayouts = (props: Props) => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 w-1/3 h-20 bg-slate-300" >
-            <h2 className="text-xl">Saving Plan</h2>
-            <h1 className="text-2xl">2 saving plans</h1>
+         <div className="flex flex-col gap-5 w-1/3 h-20 bg-slate-200 border-2 rounded text-center shadow-md " >
+            <h2 className="text-start pl-2">Saving Plan</h2>
+            <h1 className="text-2xl text-start pl-2">2 saving plans</h1>
             <div className="flex justify-around bg-white rounded-lg p-5 shadow-md">
               <div className="flex items-center">
              
@@ -50,6 +48,7 @@ const CategoriesFormLayouts = (props: Props) => {
               </div>
             </div>
           </div>
+       
         </main>
 
   

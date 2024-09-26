@@ -1,11 +1,11 @@
 
-
 import { object, string } from 'yup';
 import Login from './Login';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useLoginMutation } from '../Slice/AuthSlice';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const LoginWrapper = () => {
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ const LoginWrapper = () => {
     const initialValues = {
         email: "",
         password: "",
-        adminCode: "ADMIN1234",
+        role: "admin",
     };
 
     const validationSchema = object({
@@ -22,13 +22,20 @@ const LoginWrapper = () => {
         password: string().required("Please enter your password"),
     });
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) { 
+            navigate("/dashboard");
+        }
+    }, [navigate]);
+
     const handleSubmit = (values: any, { setSubmitting }: FormikHelpers<any>) => {
         login(values)
             .then((res) => {
-                if (res.data && res.data.token) {
+                if (res.data.status) {
                     localStorage.setItem("token", res.data.token);
                     toast.success("Login successful");
-                    navigate("/Layout");
+                    navigate("/dashboard");
                 } else {
                     toast.error("Login failed: No token received");
                 }
@@ -57,4 +64,5 @@ const LoginWrapper = () => {
 };
 
 export default LoginWrapper;
+
 

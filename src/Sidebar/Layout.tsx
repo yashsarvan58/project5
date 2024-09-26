@@ -10,13 +10,13 @@ const Layout = (props: Props) => {
   return (
     <div className='h-screen flex '>
         
-            <SideBar/>
+        <SideBar/>
         <div className='w-screen'>
-            <CategoriesFormLayouts/>
+        {/* <CategoriesFormLayouts/> */}
+        <Outlet/>
         </div>
        
         <div className='flex-1 bg-gray-200 '>
-        <Outlet/>
         </div>
     </div>
   )
