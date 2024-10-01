@@ -50,26 +50,24 @@ const AddCategories = (props: Props) => {
   };
 
   return (
-    <div className='bg-slate-100 flex items-center justify-center h-screen'>
-      <div className='h-full w-full flex flex-col p-5 shadow-lg bg-slate-300 rounded-lg'>
-        <label className='text-2xl text-slate-500 pb-3'>Categories</label><hr  className='pb-5'/>
-
-        <div className='flex justify-end mb-3'>
+    <div className='bg-slate-500 flex items-center justify-center h-full text-zinc-600'>
+      <span className='h-full w-full flex flex-col p-5 shadow-lg  rounded-lg'>
+        <span className='flex justify-end mb-3 mt-[60px] '>
           <button
             onClick={() => {
               setIsModalVisible(true);
               setIsEditing(false);
               setCategory(''); 
             }}
-            className='border-2 rounded bg-sky-500 h-10 w-48 text-slate-600 font-semibold'
+            className='border-2 rounded bg-sky-500 h-10 w-48 text-slate-600 font-semibold mt-5'
           >
             Add New Category
           </button>
-        </div>
+        </span>
 
         {error && <p className='text-red-500 mt-2'>{error}</p>}
 
-        <table className='mt-5 w-full border border-gray-300 rounded-lg'>
+        <table className='w-full border border-gray-300 rounded-lg bg-white'>
           <thead>
             <tr className='bg-gray-200'>
               <th className='border-b border-gray-300 p-2 text-left'>Categories Name</th>
@@ -135,7 +133,7 @@ const AddCategories = (props: Props) => {
             </div>
           </div>
         )}
-      </div>
+      </span>
     </div>
   );
 };

@@ -18,10 +18,11 @@ const TransactionHistory = (props: Props) => {
   ];
 
   return (
+    <div className='h-full w-full bg-slate-600   text-zinc-400'>
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Transaction History</h2>
-      <table className="min-w-full border-collapse border border-gray-300">
-        <thead className="bg-gray-200">
+      <table className="min-w-full border-collapse border border-gray-300 bg-slate-700">
+        <thead className="bg-gray-500">
           <tr>
             <th className="border border-gray-300 p-2">ID</th>
             <th className="border border-gray-300 p-2">Date</th>
@@ -31,7 +32,7 @@ const TransactionHistory = (props: Props) => {
         </thead>
         <tbody>
           {transactions.map(transaction => (
-            <tr key={transaction.id} className="hover:bg-gray-100">
+            <tr key={transaction.id} className="hover:bg-slate-500">
               <td className="border border-gray-300 p-2">{transaction.id}</td>
               <td className="border border-gray-300 p-2">{transaction.date}</td>
               <td className="border border-gray-300 p-2">{transaction.description}</td>
@@ -42,6 +43,7 @@ const TransactionHistory = (props: Props) => {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 };
