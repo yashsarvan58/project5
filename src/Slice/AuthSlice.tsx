@@ -12,13 +12,7 @@ export const authSlice = ApiSlice.injectEndpoints({
             })
         }),
 
-        // categories:builder.mutation({
-        //     query: (body)=> ({
-        //         url:"/admin/login",
-        //         method:"POST",
-        //         body
-        //     })
-        // })
+       
     })
 })
 

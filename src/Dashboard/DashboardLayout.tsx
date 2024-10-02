@@ -1,12 +1,11 @@
-
-
+import React from 'react'
 import { MdElectricBolt } from "react-icons/md";
 import { TbDeviceMobileMessage } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
+type Props = {}
 
-const CategoriesFormLayouts = (props: Props) => {
+const DashboardLayout = (props: Props) => {
   return (
     <div className="flex h-screen bg-slate-500">
       <main className="flex flex-col mt-[70px] items-center w-full ">
@@ -44,7 +43,7 @@ const CategoriesFormLayouts = (props: Props) => {
         </div>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default CategoriesFormLayouts;
+export default DashboardLayout

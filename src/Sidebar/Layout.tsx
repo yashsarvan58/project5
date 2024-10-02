@@ -1,8 +1,7 @@
 import React from 'react'
 import SideBar from './SideBar'
 import { Outlet } from 'react-router-dom'
-import CategoriesFormWrapper from '../Layouts/CategoriesFormWrapper'
-import CategoriesFormLayouts from '../Layouts/CategoriesFormLayouts'
+
 
 type Props = {}
 

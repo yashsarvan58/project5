@@ -30,7 +30,7 @@ const Sidebar = () => {
             </Link>
             <hr />
 
-            <Link to="add">
+            <Link to="categories-list">
                 <div className="flex items-center h-10 mt-4 cursor-pointer hover:bg-transparent hover:border-2 font-semibold p-2 rounded">
                     <TbCategory className="mt-1 mr-3" />
                     <p>Categories</p>

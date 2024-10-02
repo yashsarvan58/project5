@@ -2,11 +2,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LoginWrapper from '../Login/LoginWrapper'
 
 import Layout from '../Sidebar/Layout'
-import AddCategoriesWrapper from '../Categories/Add/AddCategoriesWrapper'
-import AddCategories from '../Categories/Layout/AddCategories'
 import TransactionShowWrapper from '../Transaction/Add/AddTransactionWrapper'
-import CategoriesFormLayouts from '../Layouts/CategoriesFormLayouts'
 import TransactionHistory from '../History/TransactionHistory/TransactionHistory'
+import DashboardLayout from '../Dashboard/DashboardLayout'
+import CategoriesFormWrapper from '../Categories/Layout/CategoriesFormWrapper'
+import ListCategoriesWrapper from '../Categories/List/ListCategoriesWrapper'
 
 
 const PageRoutes = () => {
@@ -25,13 +25,13 @@ const PageRoutes = () => {
           children:[
             {
               path:"",
-              element:<CategoriesFormLayouts/>
+              element:<DashboardLayout/>
             },
             {
-              path: "add",
-              element:<AddCategories/>
-             
+              path: "categories-list",
+              element:<ListCategoriesWrapper/>,
             },
+
             {
               path: "transaction",
               element:<TransactionShowWrapper/>
@@ -45,6 +45,10 @@ const PageRoutes = () => {
 
           ]
          
+        },
+        {
+          path: "/add",
+          element:<CategoriesFormWrapper/>
         },
         
        
