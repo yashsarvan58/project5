@@ -8,18 +8,7 @@ const TransactionShowWrapper = () => {
 
   ]);
 
-  // useEffect(() => {
-  //   const getTransactions = async () => {
-  //     try {
-  //       const res = await fetchTransactions(); // Assuming fetchTransactions returns a promise
-  //       setTransactions(res.data); // Adjust based on your API response structure
-  //     } catch (error) {
-  //       console.error('Error fetching transactions:', error);
-  //     }
-  //   };
-
-  //   getTransactions();
-  // }, []);
+  
 
   return <TransactionShow transactions={transactions} />;
 };

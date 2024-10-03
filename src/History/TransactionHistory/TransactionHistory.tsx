@@ -18,7 +18,7 @@ const TransactionHistory = (props: Props) => {
   ];
 
   return (
-    <div className='h-full w-full bg-slate-600   text-zinc-400'>
+    <div className='h-full w-full bg-slate-500   text-zinc-400'>
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Transaction History</h2>
       <table className="min-w-full border-collapse border border-gray-300 bg-slate-700">

@@ -4,33 +4,40 @@ export const CategorySlice = ApiSlice.injectEndpoints({
     endpoints: (builder) => ({
 
       addCategory: builder.mutation({
-        query: ({ categoryData }: { categoryData: any }) => ({
+        query: ({ categoryData, token }: any) => ({
           url: 'category/add-category',
           method: 'POST',
           body: categoryData,
+          headers: {"x-access-token" : token}
         }),
+        invalidatesTags: ['category']
       }),
   
       getCategory: builder.query({
-        query: () => ({
+        query: ({token}:any) => ({
           url: 'category/get-category',
           method: 'GET',
+          headers: {"x-access-token" : token},
         }),
       }),
   
       getSingleCategory: builder.query({
-        query: (id: number) => ({
+        query: ({token, id}: any) => ({
           url: `category/getSingleCategory/${id}`,
           method: 'GET',
+          headers: {"x-access-token" : token},
         }),
+        providesTags: ['category']
       }),
   
       editCategory: builder.mutation({
-        query: ({ categoryData, id }: { categoryData: any; id: number }) => ({
+        query: ({ categoryData, id, token }: any) => ({
           url: `category/update-category/${id}`,
           method: 'PUT',
           body: categoryData,
+          headers: {"x-access-token" : token}
         }),
+        invalidatesTags: ['category']
       }),
   
       deleteCategory: builder.mutation({
@@ -38,6 +45,7 @@ export const CategorySlice = ApiSlice.injectEndpoints({
           url: `category/delete-category/${id}`, // Adjust this endpoint based on your API
           method: 'DELETE',
         }),
+        invalidatesTags: ['category']
       }),
     }),
   
