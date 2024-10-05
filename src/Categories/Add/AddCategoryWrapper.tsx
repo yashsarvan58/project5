@@ -18,11 +18,11 @@ const AddCategoryFormWrapper = () => {
   
 
   const initialvalues: CategoryFormValue = {
-    categoryname: "",
+    categoryName: "",
   };
 
   const categoryValidation = object({
-    categoryname: string().required("Category is required"),
+    categoryName: string().required("Category is required"),
   });
 
   const handleSubmit = (values: CategoryFormValue) => {
@@ -30,7 +30,7 @@ const AddCategoryFormWrapper = () => {
     addCategory({ categoryData: values, token })
   .then((res: any) => {
     console.log("Response:", res);
-    if (res.data?.status === "OK") {
+    if (res.data?.status === true) {
       toast.success("Category added successfully");
       navigate("/layout/category-list");
     } else {

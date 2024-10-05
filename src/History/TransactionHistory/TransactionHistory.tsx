@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 type Transaction = {
@@ -18,34 +19,39 @@ const TransactionHistory = (props: Props) => {
   ];
 
   return (
-    <div className='h-full w-full bg-slate-500   text-zinc-400'>
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Transaction History</h2>
-      <table className="min-w-full border-collapse border border-gray-300 bg-slate-700">
-        <thead className="bg-gray-500">
-          <tr>
-            <th className="border border-gray-300 p-2">ID</th>
-            <th className="border border-gray-300 p-2">Date</th>
-            <th className="border border-gray-300 p-2">Description</th>
-            <th className="border border-gray-300 p-2">Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions.map(transaction => (
-            <tr key={transaction.id} className="hover:bg-slate-500">
-              <td className="border border-gray-300 p-2">{transaction.id}</td>
-              <td className="border border-gray-300 p-2">{transaction.date}</td>
-              <td className="border border-gray-300 p-2">{transaction.description}</td>
-              <td className={`border border-gray-300 p-2 ${transaction.amount < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                {transaction.amount}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <div className='h-full w-full bg-slate-500 text-zinc-400 p-4'>
+      <div className="p-6 max-w-4xl mx-auto">
+        <h2 className="text-2xl font-bold mb-4 text-center sm:text-left">Transaction History</h2>
+
+        {/* Responsive Table Wrapper */}
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse border border-gray-300 bg-slate-700">
+            <thead className="bg-gray-500">
+              <tr>
+                <th className="border border-gray-300 p-2 text-xs sm:text-sm">ID</th>
+                <th className="border border-gray-300 p-2 text-xs sm:text-sm">Date</th>
+                <th className="border border-gray-300 p-2 text-xs sm:text-sm">Description</th>
+                <th className="border border-gray-300 p-2 text-xs sm:text-sm">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transactions.map(transaction => (
+                <tr key={transaction.id} className="hover:bg-slate-600">
+                  <td className="border border-gray-300 p-2 text-xs sm:text-sm">{transaction.id}</td>
+                  <td className="border border-gray-300 p-2 text-xs sm:text-sm">{transaction.date}</td>
+                  <td className="border border-gray-300 p-2 text-xs sm:text-sm">{transaction.description}</td>
+                  <td className={`border border-gray-300 p-2 text-xs sm:text-sm ${transaction.amount < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                    {transaction.amount}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default TransactionHistory;
+

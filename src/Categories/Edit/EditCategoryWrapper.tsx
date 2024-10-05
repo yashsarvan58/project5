@@ -8,7 +8,7 @@ import { Form, Formik } from "formik";
 import CategoryFormLayout from "../Layout/CategoryFormLayout";
 
 export type CategoryFormValue = {
-    categoryname: string | null;
+    categoryName: string | null;
 };
 
 const EditCategoryWrapper = () => {
@@ -17,17 +17,18 @@ const EditCategoryWrapper = () => {
     const token = localStorage.getItem("Token")
     const [editCategory] = useEditCategoryMutation()
     const {id} = useParams()
+    console.log(id)
     const {data} = useGetSingleCategoryQuery({token, id})
 
     const initialValues = {
-        categoryname: data?.data?.categoryname 
+        categoryName: data?.data?.categoryName ||""
     }
     const categoryValidation = object({
-        categoryname: string().required('Name is required'),
+        categoryName: string().required('Name is required'),
     });
 
     const handleSubmit = (values: CategoryFormValue) => {
-        editCategory({categoryData: values, id, token})
+        editCategory({categoryData: values, id})
         .then((res: any)=> {
            if(res.data.msg){
             toast.success("Category edited successfully")
@@ -41,7 +42,7 @@ const EditCategoryWrapper = () => {
 
     return (
         <Formik
-        enableReinitialize
+        enableReinitialize={true}
         initialValues={initialValues}
         validationSchema={categoryValidation} 
         onSubmit={handleSubmit}

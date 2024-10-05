@@ -4,38 +4,37 @@ export const CategorySlice = ApiSlice.injectEndpoints({
     endpoints: (builder) => ({
 
       addCategory: builder.mutation({
-        query: ({ categoryData, token }: any) => ({
+        query: ({ categoryData,  id }: any) => ({
           url: 'category/add-category',
           method: 'POST',
           body: categoryData,
-          headers: {"x-access-token" : token}
+         
         }),
         invalidatesTags: ['category']
       }),
   
       getCategory: builder.query({
-        query: ({token}:any) => ({
+        query: () => ({
           url: 'category/get-category',
           method: 'GET',
-          headers: {"x-access-token" : token},
-        }),
+          
+        }), 
       }),
   
       getSingleCategory: builder.query({
-        query: ({token, id}: any) => ({
+        query: (id) => ({
           url: `category/getSingleCategory/${id}`,
           method: 'GET',
-          headers: {"x-access-token" : token},
+          
         }),
         providesTags: ['category']
       }),
   
       editCategory: builder.mutation({
-        query: ({ categoryData, id, token }: any) => ({
+        query: ({ categoryData, id, }: any) => ({
           url: `category/update-category/${id}`,
-          method: 'PUT',
-          body: categoryData,
-          headers: {"x-access-token" : token}
+          method: 'PATCH',
+          body: categoryData
         }),
         invalidatesTags: ['category']
       }),

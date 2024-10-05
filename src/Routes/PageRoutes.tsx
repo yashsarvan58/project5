@@ -3,21 +3,21 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginWrapper from "../Login/LoginWrapper";
 import Layout from "../Sidebar/Layout";
 import DashboardLayout from "../Dashboard/DashboardLayout";
-// import ListCategoriesWrapper from "../Categories/List/ListCategoriesWrapper";
 import TransactionShowWrapper from "../Transaction/Add/AddTransactionWrapper";
 import TransactionHistory from "../History/TransactionHistory/TransactionHistory";
 import CategoryListingWrapper from "../Categories/List/CategoryListingWrapper";
 import AddCategoryFormWrapper from "../Categories/Add/AddCategoryWrapper";
-// import CategoriesFormWrapper from "../Category/Layout/CategoriesFormWrapper";
+import EditCategoryWrapper from "../Categories/Edit/EditCategoryWrapper";
+
 
 const PageRoutes = () => {
   const router = createBrowserRouter([
     {
       path: "/", // Root path for login
-      element: <LoginWrapper />,
+      element: <LoginWrapper />
     },
     {
-      path: "/dashboard", // Main dashboard layout
+      path: "/Layout", // Main dashboard layout
       element: <Layout />,
       children: [
         {
@@ -31,18 +31,24 @@ const PageRoutes = () => {
         },
         {
           path:"add-category",
-element:<AddCategoryFormWrapper/>
+          element:<AddCategoryFormWrapper/>
         },
+        {
+          path:"category-list/edit-category/:id",
+          element:<EditCategoryWrapper/>
+        },
+
+      
         
         {
           path: "transaction", // Adding a transaction
-          element: <TransactionShowWrapper />,
+          element: <TransactionShowWrapper/>,
         },
         {
           path: "transaction-history", // Transaction history page
           element: <TransactionHistory />,
-        },
-      ],
+        }
+      ]
     },
 
   ]);
