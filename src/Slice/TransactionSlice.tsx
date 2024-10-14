@@ -4,19 +4,21 @@ export const TransactionSlice = ApiSlice.injectEndpoints({
     endpoints: (builder) => ({
 
       addTransaction: builder.mutation({
-        query: ({ transactionData,  }: any) => ({
+        query: ({ transactionData, token }: any) => ({
           url: 'transaction/add-Transaction',
           method: 'POST',
           body: transactionData,
+          headers: token,
           
         }),
         invalidatesTags: ['transaction']
       }),
   
       getTransaction: builder.query({
-        query: ({}:any) => ({
+        query: ({token}:any) => ({
           url: 'transaction/get-Transaction',
           method: 'GET',
+          headers:token,
           
         }),
       }),

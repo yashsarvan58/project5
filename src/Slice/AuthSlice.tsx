@@ -12,7 +12,6 @@ export const authSlice = ApiSlice.injectEndpoints({
             })
         }),
 
-       
     })
 })
 

@@ -90,14 +90,14 @@ const LoginWrapper = () => {
         password: string().required("Please enter your password"),
     });
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) { 
-            navigate("/"); // User is already logged in, navigate to home
-        } else {
-            navigate("/login"); // No token, navigate to login
-        }
-    }, [navigate]);
+    // useEffect(() => {
+    //     const token = localStorage.getItem("token");
+    //     if (token) { 
+    //         navigate("/"); // User is already logged in, navigate to home
+    //     } else {
+    //         navigate("/login"); // No token, navigate to login
+    //     }
+    // }, [navigate]);
 
     const handleSubmit = (values: any, { setSubmitting }: FormikHelpers<any>) => {
         login(values)
