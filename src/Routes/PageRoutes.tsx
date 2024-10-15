@@ -9,6 +9,7 @@ import CategoryListingWrapper from "../Categories/List/CategoryListingWrapper";
 import AddCategoryFormWrapper from "../Categories/Add/AddCategoryWrapper";
 import EditCategoryWrapper from "../Categories/Edit/EditCategoryWrapper";
 import AddTransactionFormWrapper from "../Transaction/Add/AddTransactionWrapper";
+import EditTransactionWrapper from "../Transaction/Edit/EditTransactionWrapper";
 
 
 const PageRoutes = () => {
@@ -38,12 +39,14 @@ const PageRoutes = () => {
           path:"category-list/edit-category/:id",
           element:<EditCategoryWrapper/>
         },
-
-      
-        
+ 
         {
           path: "transaction", // Adding a transaction
           element: <AddTransactionFormWrapper/>
+        },
+        {
+          path: "/layout/transaction/edit/:id", // Adding a transaction
+          element: <EditTransactionWrapper/>
         },
         {
           path: "transaction-history", // Transaction history page

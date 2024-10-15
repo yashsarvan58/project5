@@ -1,7 +1,7 @@
 
 
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useGetTransactionQuery } from '../../Slice/TransactionSlice';
 
 type Transaction = {
@@ -17,10 +17,10 @@ type Props = {};
 
 const TransactionHistory = (props: Props) => {
   const token = localStorage.getItem("token");
-  console.log(token);
+
 
   const { data } = useGetTransactionQuery(token);
-  console.log(data);
+
 
   const navigate = useNavigate();
 
@@ -39,8 +39,7 @@ const TransactionHistory = (props: Props) => {
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse border border-gray-300 bg-slate-700">
             <thead className="bg-gray-500">
-              <tr>
-                <th className="border border-gray-300 p-2 text-xs sm:text-sm">ID</th>
+              <tr >
                 <th className="border border-gray-300 p-2 text-xs sm:text-sm">Category Name</th>
                 <th className="border border-gray-300 p-2 text-xs sm:text-sm">Date</th>
                 <th className="border border-gray-300 p-2 text-xs sm:text-sm">Type</th>
@@ -51,8 +50,7 @@ const TransactionHistory = (props: Props) => {
             </thead>
             <tbody>
               {data?.data?.map(transaction => (
-                <tr key={transaction.id} className="hover:bg-slate-600">
-                  <td className="border border-gray-300 p-2 text-xs sm:text-sm">{transaction.id}</td>
+                <tr key={transaction._id} className="hover:bg-slate-600">
                   <td className="border border-gray-300 p-2 text-xs sm:text-sm">{transaction.categoryName}</td>
                   <td className="border border-gray-300 p-2 text-xs sm:text-sm">{transaction.date}</td>
                   <td className="border border-gray-300 p-2 text-xs sm:text-sm">{transaction.type}</td>
@@ -61,17 +59,17 @@ const TransactionHistory = (props: Props) => {
                   </td>
                   <td className="border border-gray-300 p-2 text-xs sm:text-sm">{transaction.remark}</td>
                   <td className="border border-gray-300 p-2 text-xs sm:text-sm"> {/* New Actions Cell */}
-                    <button
+                    <Link to={`/layout/transaction/edit/${transaction._id}`}
                       className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
-                      onClick={() => navigate(`/layout/transaction/edit/${transaction.id}`)}
+                      // onClick={() => navigate(`/layout/transaction/edit/${transaction.id}`)}
                     >
                       Edit
-                    </button>
+                    </Link>
                     <button
                       className="bg-red-500 text-white px-2 py-1 rounded"
                       onClick={() => {
                         // Handle the delete action here
-                        console.log(`Deleting transaction with ID ${transaction.id}`);
+                        console.log(`Deleting transaction with ID ${transaction._id}`);
                       }}
                     >
                       Delete

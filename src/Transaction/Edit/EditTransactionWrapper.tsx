@@ -34,7 +34,7 @@ const EditTransactionWrapper = () => {
         if (res.data.msg) {
           toast.success("Transaction edited successfully");
         }
-        navigate("/layout/Transaction-list");
+        navigate("/layout/Transaction-history");
       })
       .catch((err) => {
         toast.error(err);

@@ -8,7 +8,7 @@ export const TransactionSlice = ApiSlice.injectEndpoints({
           url: 'transaction/add-Transaction',
           method: 'POST',
           body: transactionData,
-          headers: token,
+          headers: {"x-access-token":token},
           
         }),
         invalidatesTags: ['transaction']

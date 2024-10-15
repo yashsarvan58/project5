@@ -1,4 +1,3 @@
-
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ const CategoryListing = ({ data, onDelete }: any) => {
       <div className="w-full max-w-4xl p-6 bg-slate-600 border border-gray-200 rounded-lg shadow-md">
         <div className="flex flex-col md:flex-row justify-between items-center mb-6">
           <h2 className="text-xl font-semibold mb-4 md:mb-0">Category</h2>
-
           <button
             onClick={() => {
               navigate("/Layout/add-category");
@@ -21,7 +19,6 @@ const CategoryListing = ({ data, onDelete }: any) => {
             Add Category
           </button>
         </div>
-
         <div className="overflow-x-auto">
           <table className="min-w-full table-auto border bg-slate-500 text-sm">
             <thead className="border">
@@ -34,7 +31,9 @@ const CategoryListing = ({ data, onDelete }: any) => {
               {data?.data.length > 0 ? (
                 data?.data.map((category: any) => (
                   <tr key={category._id}>
-                    <td className="py-2 px-4 border-b">{category.categoryName}</td>
+                    <td className="py-2 px-4 border-b">
+                      {category.categoryName}
+                    </td>
                     <td className="py-2 px-4 border-b flex justify-center gap-2">
                       <Link to={`edit-category/${category._id}`}>
                         <button className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
@@ -66,4 +65,3 @@ const CategoryListing = ({ data, onDelete }: any) => {
 };
 
 export default CategoryListing;
-

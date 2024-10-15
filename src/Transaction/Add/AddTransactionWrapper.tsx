@@ -5,9 +5,10 @@ import { toast } from "react-toastify";
 import { Form, Formik } from "formik";
 import TransactionFormLayout from "../Layout/TransactionFormLayout";
 import { useAddTransactionMutation } from "../../Slice/TransactionSlice";
+import { useGetCategoryQuery } from "../../Slice/CategoriesSlice";
 
 export type TransactionFormValue = {
-  categoryName: string;
+  // categoryName: string;
   date: string;
   type: string;
   amount: number;
@@ -15,19 +16,23 @@ export type TransactionFormValue = {
 };
 
 const AddTransactionFormWrapper = () => {
+  const token = localStorage.getItem("token");
+  const {data}=useGetCategoryQuery('')
+  // console.log(data);
+  
   const navigate = useNavigate();
-  const [addTransaction] = useAddTransactionMutation(); // Moved outside of handleSubmit
+  const [addTransaction] = useAddTransactionMutation();
 
-  const initialvalues: TransactionFormValue = {
-    categoryName: "",
+  const initialValues: TransactionFormValue = {
+    // categoryName: "",
     date: "",
     type: "",
-    amount: 0,
     remark: "",
+    amount:0,
   };
 
   const TransactionValidation = object({
-    categoryName: string().required("Category Name is required"),
+    // categoryName: string().required("Category Name is required"),
     date: string().required("Date is required"),
     type: string().required("Transaction Type is required"),
     amount: number()
@@ -35,51 +40,50 @@ const AddTransactionFormWrapper = () => {
       .positive("Amount must be positive"),
     remark: string().optional(),
   });
-  const handleAdd=()=>{
-    
-    alert("s")
-  }
-  const handleSubmit = async (values: TransactionFormValue) => {
-    console.log("Form submitted", values);
 
-    const token = localStorage.getItem("token");
-    console.log("Token:", token);
+  const handleSubmit = (values: TransactionFormValue) => {
+    console.log("value", values);
 
-    try {
-      // Make the API call with addTransaction
-      const response = await addTransaction({ values, token }).unwrap();
-      console.log("Transaction added successfully:", response);
+
+    // Make the API call with addTransaction, passing the headers correctly
+    addTransaction({ transactionData: values,token })
+      .then((response) => {
+        console.log("hhhh", response);
+        if (response?.data.status) {
+          toast.success(response?.data.msg)
+          navigate("/layout/transaction-history");
+        } else {
+        toast.error(response?.data.msg);
+          
+        }
+        // Show success notification
       
-      // Show success notification
-      toast.success("Transaction added successfully!");
-      
-      // Redirect to another page, e.g., the transaction list page
-      navigate("/transactions");
-    } catch (error) {
-      // Show error notification
-      toast.error("Failed to add transaction. Please try again.");
-      console.error("Error adding transaction:", error);
-    }
+        
+        // Redirect to another page, e.g., the transaction list page
+      })
+      .catch((error) => {
+        // Show error notification
+        toast.error("Failed to add transaction. Please try again.");
+      });
   };
+
+
 
   return (
     <Formik
-      initialValues={initialvalues}
+      initialValues={initialValues}
       validationSchema={TransactionValidation}
       onSubmit={handleSubmit}
     >
       {({ handleSubmit, ...formikProps }) => (
         <Form onSubmit={handleSubmit}>
           <TransactionFormLayout
+          data={data}
             heading={"Add Transaction"}
             buttonName="Add"
             formikProps={formikProps}
-            handleAdd={handleAdd}
           />
-          {/* The submit button should have type="submit" */}
-          <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-            Submit
-          </button>
+         
         </Form>
       )}
     </Formik>
