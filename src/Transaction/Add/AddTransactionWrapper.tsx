@@ -53,16 +53,10 @@ const AddTransactionFormWrapper = () => {
           toast.success(response?.data.msg)
           navigate("/layout/transaction-history");
         } else {
-        toast.error(response?.data.msg);
-          
-        }
-        // Show success notification
-      
-        
-        // Redirect to another page, e.g., the transaction list page
+        toast.error(response?.data.msg);        
+        }   
       })
-      .catch((error) => {
-        // Show error notification
+      .catch((error) => {   
         toast.error("Failed to add transaction. Please try again.");
       });
   };

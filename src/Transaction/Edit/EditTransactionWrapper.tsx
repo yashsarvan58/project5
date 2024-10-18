@@ -1,43 +1,65 @@
 import { useNavigate, useParams } from "react-router-dom";
-// import {
-//   useEditTransactionMutation,
-//   useGetSingleTransactionQuery,
-// } from "../../Slice/CategoriesSlice";
-import { object, string } from "yup";
+import { object, string, number } from "yup";
 import { toast } from "react-toastify";
 import { Form, Formik } from "formik";
 import TransactionFormLayout from "../Layout/TransactionFormLayout";
-import { useEditTransactionMutation, useGetSingleTransactionQuery } from "../../Slice/TransactionSlice";
+import {
+  useEditTransactionMutation,
+  useGetSingleTransactionQuery,
+} from "../../Slice/TransactionSlice";
+
+import { useGetCategoryQuery } from "../../Slice/CategoriesSlice";
 
 export type TransactionFormValue = {
-  transactionName: string | null;
+  // categoryName: string;
+  date: string;
+  type: string;
+  amount: number;
+  remark: string;
 };
 
 const EditTransactionWrapper = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("Token");
-  const [editTransaction] = useEditTransactionMutation();
+  const token = localStorage.getItem("token");
   const { id } = useParams();
-  const { data } = useGetSingleTransactionQuery({ token, id });
+  
+  const { data: categoryData} = useGetCategoryQuery({token});
+  const { data: transactionData } = useGetSingleTransactionQuery({ token, id });
+  const [editTransaction] = useEditTransactionMutation();
+  
 
-
-  const initialValues = {
-    transactionName: data?.data?.transactionName,
+  const initialValues: TransactionFormValue = {
+    // categoryName: transactionData?.data?.categoryName || "",
+    date: transactionData?.data?.date || "",
+    type: transactionData?.data?.type || "",
+    amount: transactionData?.data?.amount || 0,
+    remark: transactionData?.data?.remark || "",
   };
+
   const TransactionValidation = object({
-    transactionName: string().required("Name is required"),
+    // categoryName: string().required("Category Name is required"),
+    date: string().required("Date is required"),
+    type: string().required("Transaction Type is required"),
+    amount: number()
+      .required("Amount is required")
+      .positive("Amount must be positive"),
+    remark: string().optional(),
   });
 
   const handleSubmit = (values: TransactionFormValue) => {
-    editTransaction({ transactionData: values, id, token })
+    editTransaction({ EditData: values, id, token })
       .then((res: any) => {
-        if (res.data.msg) {
-          toast.success("Transaction edited successfully");
+        console.log(values,'yyyy')
+        console.log(res,'kkkkk')
+        if (res?.data?.status) {
+          toast.success(res?.data?.msg || "Transaction edited successfully");
+          navigate("/layout/transaction-history");
+        } else {
+          toast.error(res?.data?.msg || "Failed to edit transaction. Please try again.");
         }
-        navigate("/layout/Transaction-history");
       })
-      .catch((err) => {
-        toast.error(err);
+      .catch(() => {
+        toast.error("Failed to edit transaction. Please try again.");
       });
   };
 
@@ -48,9 +70,10 @@ const EditTransactionWrapper = () => {
       validationSchema={TransactionValidation}
       onSubmit={handleSubmit}
     >
-      {({ handleSubmit, ...formikProps }: any) => (
+      {({ handleSubmit, ...formikProps }) => (
         <Form onSubmit={handleSubmit}>
           <TransactionFormLayout
+            data={categoryData}
             heading={"Edit Transaction"}
             buttonName="Edit"
             formikProps={formikProps}
@@ -62,3 +85,4 @@ const EditTransactionWrapper = () => {
 };
 
 export default EditTransactionWrapper;
+

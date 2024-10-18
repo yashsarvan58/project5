@@ -11,46 +11,49 @@ export const TransactionSlice = ApiSlice.injectEndpoints({
           headers: {"x-access-token":token},
           
         }),
-        invalidatesTags: ['transaction']
+        invalidatesTags:['transactions']
       }),
   
       getTransaction: builder.query({
         query: ({token}:any) => ({
           url: 'transaction/get-Transaction',
           method: 'GET',
-          headers:token,
-          
+          headers: {"x-access-token":token},
         }),
+        providesTags: ['transactions']
       }),
   
       getSingleTransaction: builder.query({
-        query: ({ id}: any) => ({
-          url: `transaction/getSingleTransaction/${id}`,
+        query: ({ token, id}: any) => ({
+          url: `transaction/get-single/${id}`,
           method: 'GET',
+          headers: {"x-access-token":token},
           
         }),
-        providesTags: ['transaction']
+        providesTags: ['transactions']
       }),
   
       editTransaction: builder.mutation({
-        query: ({ transactionData, id, }: any) => ({
-          url: `transaction/update-Transaction/${id}`,
+        query: ({ EditData, id, token }: any) => ({
+          url: `/transaction/update-transaction/${id}`,
           method: 'PUT',
-          body: transactionData,
+          body: EditData,
+          headers: {"x-access-token":token},
           
         }),
-        invalidatesTags: ['transaction']
+        invalidatesTags: ['transactions']
       }),
   
       deleteTransaction: builder.mutation({
-        query: (id: number) => ({
+        query: ({token, id}: any) => ({
           url: `transaction/delete-Transaction/${id}`, // Adjust this endpoint based on your API
           method: 'DELETE',
+          headers: {"x-access-token":token},
         }),
-        invalidatesTags: ['transaction']
+        invalidatesTags: ['transactions']
       }),
     }),
   
 })
 
-export const {useAddTransactionMutation, useGetTransactionQuery, useGetSingleTransactionQuery, useEditTransactionMutation, useDeleteTransactionMutation} = TransactionSlice
+export const {useAddTransactionMutation, useGetTransactionQuery, useGetSingleTransactionQuery, useEditTransactionMutation, useDeleteTransactionMutation} = TransactionSlice 

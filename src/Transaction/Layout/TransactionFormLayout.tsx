@@ -120,6 +120,7 @@ type Props = {
   formikProps: FormikProps<TransactionFormValue>;
   heading: string;
   buttonName: string;
+
 };
 
 const TransactionFormLayout = ({
@@ -131,21 +132,21 @@ const TransactionFormLayout = ({
   const { values, handleChange, isSubmitting } = formikProps;
 
   return (
-    <div className="flex justify-center items-center h-screen bg-slate-500">
+    <div className="flex justify-center items-center h-full bg-slate-500 ">
       <div className="w-full max-w-md p-6 bg-slate-600 text-gray-400 border border-gray-200 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold text-center mb-6">{heading}</h2>
 
         {/* Category Name Field */}
-        <div className="mb-4 ">
-          {/* <ATMTextField
+        {/* <div className="mb-4 ">
+          <ATMTextField
             label="Category Name"
             name="categoryName"
             placeholder="Enter Category Name"
             value={values.categoryName}
             onChange={handleChange}
             className="w-full"
-          /> */}
-          {/* <label htmlFor=""> Category name</label>
+          />
+          <label htmlFor=""> Category name</label>
           <br />
           <select
             name="categoryName"
@@ -163,8 +164,8 @@ const TransactionFormLayout = ({
           </select>
           <p className="text-red-400">
             <ErrorMessage name="categoryName" />
-          </p> */}
-        </div>
+          </p>
+        </div> */}
 
         {/* Transaction Date Field */}
         <div className="mb-4">

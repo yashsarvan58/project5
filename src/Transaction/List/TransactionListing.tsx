@@ -1,69 +1,115 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useGetTransactionQuery } from "../../Slice/TransactionSlice";
 
+type Props = {
+  id: number;
+  categoryName: string;
+  date: string;
+  type: string;
+  amount: number;
+  remark: string;
+  HandleDelete: (id: string) => void;
+};
 
-// import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { Link, useNavigate } from "react-router-dom";
+const TransactionListing = ({ HandleDelete }: Props) => {
+  const token = localStorage.getItem("token");
 
-// const TransactionListing = ({ data, onDelete }: any) => {
-//   const navigate = useNavigate();
+  const { data } = useGetTransactionQuery(token);
 
-//   return (
-//     <div className="flex justify-center items-center min-h-screen text-gray-400 bg-slate-500 p-4">
-//       <div className="w-full max-w-4xl p-6 bg-slate-600 border border-gray-200 rounded-lg shadow-md">
-//         <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-//           <h2 className="text-xl font-semibold mb-4 md:mb-0">Transaction</h2>
+  const navigate = useNavigate();
 
-//           <button
-//             onClick={() => {
-//               navigate("/layout/transaction-listing");
-//             }}
-//             className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-//           >
-//             Add Transaction
-//           </button>
-//         </div>
+  return (
+    <div className="bg-slate-500 w-full h-full">
+      <div className="h-full w-full bg-slate-500 text-zinc-400 p-4">
+        <div className="p-6 max-w-4xl mx-auto">
+          <div className="flex justify-between mt-10">
+            <h2 className="text-2xl font-bold mb-4 text-center sm:text-left">
+              Transactions
+            </h2>
+            <button
+              className="border bg-gray-600 items-end mb-5 rounded p-2 w-[200px]"
+              onClick={() => navigate("/layout/transaction")}
+            >
+              Add Transaction
+            </button>
+          </div>
 
-//         <div className="overflow-x-auto">
-//           <table className="min-w-full table-auto border bg-slate-500 text-sm">
-//             <thead className="border">
-//               <tr className="text-slate-600 text-center">
-//                 <th className="py-2 px-4 border-b">Transaction</th>
-//                 <th className="py-2 px-4 border-b">Action</th>
-//               </tr>
-//             </thead>
-//             <tbody className="text-slate-900 text-center bg-slate-400">
-//               {data?.data.length > 0 ? (
-//                 data?.data.map((transaction: any) => (
-//                   <tr key={transaction._id}>
-//                     <td className="py-2 px-4 border-b">{transaction.transactionName}</td>
-//                     <td className="py-2 px-4 border-b flex justify-center gap-2">
-//                       <Link to={`edit-Transaction/${transaction._id}`}>
-//                         <button className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
-//                           <FontAwesomeIcon icon={faEdit} />
-//                         </button>
-//                       </Link>
-//                       <button
-//                         className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-//                         onClick={() => onDelete(transaction._id)}
-//                       >
-//                         <FontAwesomeIcon icon={faTrash} />
-//                       </button>
-//                     </td>
-//                   </tr>
-//                 ))
-//               ) : (
-//                 <tr>
-//                   <td colSpan={2} className="text-center py-4">
-//                     Loading...
-//                   </td>
-//                 </tr>
-//               )}
-//             </tbody>
-//           </table>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+          {/* Responsive Table Wrapper */}
+          <div className="overflow-x-auto">
+            <table className="min-w-full border-collapse border border-gray-300 bg-slate-700">
+              <thead className="bg-gray-500">
+                <tr>
+                  <th className="border border-gray-300 p-2 text-xs sm:text-sm">
+                    Category Name
+                  </th>
+                  <th className="border border-gray-300 p-2 text-xs sm:text-sm">
+                    Date
+                  </th>
+                  <th className="border border-gray-300 p-2 text-xs sm:text-sm">
+                    Type
+                  </th>
+                  <th className="border border-gray-300 p-2 text-xs sm:text-sm">
+                    Amount
+                  </th>
+                  <th className="border border-gray-300 p-2 text-xs sm:text-sm">
+                    Remark
+                  </th>
+                  <th className="border border-gray-300 p-2 text-xs sm:text-sm">
+                    Actions
+                  </th>{" "}
+                  {/* New Actions Column */}
+                </tr>
+              </thead>
+              <tbody>
+                {data?.data?.map((transaction) => (
+                  <tr key={transaction._id} className="hover:bg-slate-600">
+                    <td className="border border-gray-300 p-2 text-xs sm:text-sm">
+                      {transaction.categoryName}
+                    </td>
+                    <td className="border border-gray-300 p-2 text-xs sm:text-sm">
+                      {transaction.date}
+                    </td>
+                    <td className="border border-gray-300 p-2 text-xs sm:text-sm">
+                      {transaction.type}
+                    </td>
+                    <td
+                      className={`border border-gray-300 p-2 text-xs sm:text-sm ${
+                        transaction.amount < 0
+                          ? "text-red-500"
+                          : "text-green-500"
+                      }`}
+                    >
+                      {transaction.amount}
+                    </td>
+                    <td className="border border-gray-300 p-2 text-xs sm:text-sm">
+                      {transaction.remark}
+                    </td>
+                    <td className="border border-gray-300 p-2 text-xs sm:text-sm">
+                      {" "}
+                      {/* New Actions Cell */}
+                      <Link
+                        to={`/layout/transaction/edit/${transaction._id}`}
+                        className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
+                        // onClick={() => navigate(`/layout/transaction/edit/${transaction.id}`)}
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        onClick={() => HandleDelete(transaction._id)}
+                        className="bg-red-500 text-white px-2 py-1 rounded mr-2"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-// export default TransactionListing;
+export default TransactionListing;

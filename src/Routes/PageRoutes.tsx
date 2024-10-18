@@ -3,13 +3,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginWrapper from "../Login/LoginWrapper";
 import Layout from "../Sidebar/Layout";
 import DashboardLayout from "../Dashboard/DashboardLayout";
-
-import TransactionHistory from "../History/TransactionHistory/TransactionHistory";
 import CategoryListingWrapper from "../Categories/List/CategoryListingWrapper";
 import AddCategoryFormWrapper from "../Categories/Add/AddCategoryWrapper";
 import EditCategoryWrapper from "../Categories/Edit/EditCategoryWrapper";
 import AddTransactionFormWrapper from "../Transaction/Add/AddTransactionWrapper";
 import EditTransactionWrapper from "../Transaction/Edit/EditTransactionWrapper";
+import TransactionListingWrapper from "../Transaction/List/TransactionListingWrapper";
 
 
 const PageRoutes = () => {
@@ -50,7 +49,7 @@ const PageRoutes = () => {
         },
         {
           path: "transaction-history", // Transaction history page
-          element: <TransactionHistory />,
+          element: <TransactionListingWrapper/>
         }
       ]
     },

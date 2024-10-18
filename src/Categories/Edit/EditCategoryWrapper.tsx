@@ -15,20 +15,22 @@ const EditCategoryWrapper = () => {
 
     const navigate = useNavigate()
     const token = localStorage.getItem("Token")
-    const [editCategory] = useEditCategoryMutation()
     const {id} = useParams()
-    console.log(id)
-    const {data} = useGetSingleCategoryQuery({token, id})
+    const {data} = useGetSingleCategoryQuery({id,token})
+    console.log(data,'categorydata')
+    const [editCategory] = useEditCategoryMutation()
 
     const initialValues = {
-        categoryName: data?.data?.categoryName ||""
+        categoryName: data?.data?.categoryName
     }
     const categoryValidation = object({
         categoryName: string().required('Name is required'),
     });
 
     const handleSubmit = (values: CategoryFormValue) => {
-        editCategory({categoryData: values, id})
+        console.log(values,'values')
+        editCategory({id,categoryData: values , token})
+        console.log(id,'id')
         .then((res: any)=> {
            if(res.data.msg){
             toast.success("Category edited successfully")

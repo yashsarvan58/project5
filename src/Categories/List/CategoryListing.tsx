@@ -40,12 +40,12 @@ const CategoryListing = ({ data, onDelete }: any) => {
                           <FontAwesomeIcon icon={faEdit} />
                         </button>
                       </Link>
-                      <button
+                      {/* <button
                         className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                         onClick={() => onDelete(category._id)}
                       >
                         <FontAwesomeIcon icon={faTrash} />
-                      </button>
+                      </button> */}
                     </td>
                   </tr>
                 ))
